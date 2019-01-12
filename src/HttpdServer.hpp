@@ -14,7 +14,7 @@ public:
 
 protected:
 	INIReader& config;
-	uint16_t port;
+	string port;
 	string doc_root;
 };
 

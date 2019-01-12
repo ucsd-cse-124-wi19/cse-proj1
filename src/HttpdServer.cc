@@ -8,12 +8,12 @@ HttpdServer::HttpdServer(INIReader& t_config)
 {
 	auto log = logger();
 
-	long lport = config.GetInteger("httpd", "port", -1);
-	if (lport < 0 || lport > 65535) {
-		log->error("Port {} is outside the valid range", lport);
+	string pstr = config.Get("httpd", "port", "");
+	if (pstr == "") {
+		log->error("port was not in the config file");
 		exit(EX_CONFIG);
 	}
-	port = static_cast<uint16_t>(lport);
+	port = pstr;
 
 	string dr = config.Get("httpd", "doc_root", "");
 	if (dr == "") {
